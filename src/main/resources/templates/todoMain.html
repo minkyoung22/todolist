@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/css/bootstrap.min.css}"
+            rel="stylesheet" href="../css/bootstrap.min.css">
+    <title>Todo List</title>
+</head>
+<body>
+<section class="vh-100" style="background-color: #eee;">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col col-lg-9 col-xl-7">
+                <div class="card rounded-3">
+                    <div class="card-body p-4">
+
+                        <h4 class="text-center my-3 pb-3">TodoList</h4>
+
+                        <form class="row row-cols-lg-auto g-3 justify-content-center align-items-center mb-4 pb-2"
+                              th:action="@{/todoMain/add}" method="post">
+                            <div class="col-12">
+                                <div data-mdb-input-init class="form-outline">
+                                    <input type="text" id="todoName" name="todoName" class="form-control" />
+                                    <label class="form-label" for="todoName">해야할 일을 입력하세요.</label>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary">추가</button>
+                            </div>
+
+                        </form>
+
+                        <table class="table mb-4">
+                            <thead>
+                            <tr>
+                                <th scope="col">No.</th>
+                                <th scope="col">Todo todo</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="todo : ${todos}">
+                                <th scope="row" th:text="${todo.id}">투두id</th>
+                                <td th:text="${todo.todoName}" th:classappend="${todo.status.name() == 'Yes'} ? 'text-decoration-line-through text-muted' : ''">투두</td>
+                                <td th:text="${todo.status}">In progress</td>
+                                <td>
+                                    <form th:action="@{/todoMain/done}" method="post" style="display:inline">
+                                        <input type="hidden" name="todoId" th:value="${todo.id}">
+                                        <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-success ms-1">완료</button>
+                                    </form>
+
+                                    <form th:action="@{/todoMain/delete}" method="post" style="display:inline">
+                                        <input type="hidden" name="todoId" th:value="${todo.id}">
+                                        <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-danger">삭제</button>
+                                    </form>
+
+                                    <form th:onclick="|location.href='@{/todoMain/{todoId}/update(todoId=${todo.id})}'|" method="get" style="display:inline">
+                                        <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-info">수정</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>
