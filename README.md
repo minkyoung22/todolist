@@ -28,9 +28,11 @@ IDE: IntelliJ IDEA
 
 ![투두 저장](https://github.com/user-attachments/assets/3f5376f1-9951-4864-a9ec-64484ac5cbfc)
 
+
 - 해야할 일 수정
 
 ![투두 수정](https://github.com/user-attachments/assets/fd71f72b-b6f2-41dd-8faf-32ef8eacdb4a)
+
 
 - 해야할 일 삭제와 완료
 
